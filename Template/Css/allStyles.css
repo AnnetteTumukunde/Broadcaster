@@ -1,0 +1,204 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: #fff;
+    font: 1.5rem -apple-system, system-ui;
+    color: #2070c5;
+    text-align: justify;
+}
+.header {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+}
+.broadcaster-logo {
+    max-width: 7em;
+    text-align: center;
+    font-size: 2rem;
+}
+.header .navig {
+    justify-content: flex-end;
+    margin: 0 0 0 auto;
+    padding: .3em .5em;
+    font-size: .8em;
+}
+.header .navig a {
+    padding: 0 .3em;
+    text-decoration: none;
+}
+.signin {
+    color: rgba(0, 6, 43, 0.789);
+}
+.signup {
+    color: #2070c5;
+}
+.section {
+    padding: .5em;
+}
+.section .one {
+    display: flex;
+}
+.section .one .text {
+    font-size: 2rem;
+    max-width: 30vw;
+    color: rgba(0, 6, 43, 0.789);
+}
+.section .one img {
+    max-width: 20vw;
+    max-height: 20em;
+    margin: 0 0 0 auto;
+}
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    margin: .9em auto;
+    padding: 1em;
+    border: .1em solid rgba(0, 6, 43, 0.789);
+}
+.broad {
+    flex: 1 0 10em;
+}
+.content img {
+    max-width: 8em;
+    max-height: 8em;
+    padding-right: .3em;
+}
+.description {
+    color: rgba(0, 6, 43, 0.789);
+    text-align: justify;
+}
+.title {
+    color: #2070c5;
+}
+.tags {
+    padding: 1em;
+    color: #2070c5;
+}
+.section .three {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+}
+.three img {
+    max-width: 15em;
+    max-height: 20em;
+    border-radius: .5em;
+}
+.three h3 {
+    max-width: 40em;
+    margin-bottom: 1em;
+    color: rgba(0, 6, 43, 0.789);
+}
+.section .three .redflag {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.section .three .intervention {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.three .intervention .interve {
+    text-align: center;
+}
+.link {
+    text-decoration: none;
+    padding: .5em;
+    background-color: #2070c5;
+    color: #fff;
+    border-radius: 3em;
+}
+.section .four {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(248, 234, 234);
+    /* border: .1em solid #000; */
+    text-align: center;
+    box-shadow: .1em;
+    margin: 0 auto;
+}
+.tool {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.add {
+    max-width: 10em;
+    max-height: 10em;
+}
+.footer {
+    background: rgba(236, 233, 233, 0.6);
+    color: rgba(121, 121, 121, 0.789);
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.footer a {
+    text-decoration: none;
+}
+.footer .menus {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.menus ul {
+    list-style-type: none;
+    padding: 5em;
+}
+.menus ul li {
+    padding: .5em;
+}
+.menus ul li a:hover {
+    color: rgba(0, 6, 43, 0.789);
+}
+.copy ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    justify-content: center;
+}
+.copy ul li {
+    padding: 1em;
+}
+.copy ul li a:hover {
+    color: rgba(0, 6, 43, 0.789);
+}
+.note {
+    text-align: center;
+}
+.form {
+    max-width: 40vw;
+    display: flex;
+    flex-direction: column;
+    margin: 2em auto;
+    text-align: center;
+}
+.form input {
+    padding: 2em .9em;
+    margin: 1em 0;
+    border-radius: .3em;
+    font-size: 1rem;
+}
+.form button {
+    padding: 2em;
+    margin: 1em 0;
+    border-radius: .3em;
+    background-color: #2070c5;
+    font-size: 1rem;
+    color: #fff;
+}
+.form h6 a {
+    color: rgba(121, 121, 121, 0.789);
+    text-decoration: none;
+}
+.form h6 a:hover {
+    color: rgba(0, 6, 43, 0.789);
+}
+.agree {
+    font-size: .5em;
+}
