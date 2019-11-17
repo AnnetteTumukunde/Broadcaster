@@ -1,0 +1,36 @@
+{
+  "name": "broadcaster",
+  "version": "1.0.0",
+  "description": "This is for reporting corruption crimes and damaged infrastructures for government intervention.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node ./Server/index.js",
+    "lint": "eslint ./Server || true",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnnetteTumukunde/Broadcaster.git"
+  },
+  "author": "Annette Tumukunde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnnetteTumukunde/Broadcaster/issues"
+  },
+  "homepage": "https://github.com/AnnetteTumukunde/Broadcaster#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/node": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.2"
+  }
+}
