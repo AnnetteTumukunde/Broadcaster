@@ -12,7 +12,7 @@ const auth = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.PRIVATE_KEY);
         const retrieve = users.find((user) => {
-            return user.id === req.body.id;
+            return user.id === parseInt(req.body.id);
         });
         if (retrieve) {
             return res.status(400).json({ status: 400, message: 'Provided Invalid Token' });

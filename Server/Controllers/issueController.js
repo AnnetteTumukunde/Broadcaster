@@ -16,8 +16,21 @@ const createIncident = (req, res) => {
 };
 
 const fetchIncident = (req, res) => {
-    const author = req.user.id;
+    const author = req.user.uid;
     res.status(200).json({ status: 200, data: [{ author, issueData }] });
 };
 
-export { createIncident, fetchIncident };
+const fetchSpecifiedIncident = (req, res) => {
+    const author = req.user.uid;
+    const search = issueData.find((incident) => {
+        return incident.id === parseInt(req.params.id);
+    });
+    if (search) {
+        res.status(200).json({ status: 200, data: { author, search } });
+    }
+    else {
+        res.status(404).json({ status: 404, message: 'Failed to find incident' });
+    }
+};
+
+export { createIncident, fetchIncident, fetchSpecifiedIncident };
