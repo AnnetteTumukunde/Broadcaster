@@ -15,4 +15,9 @@ const createIncident = (req, res) => {
     res.status(201).json({ status: 201, data: [{ id, message: 'Created red-flag record' }, { date, author, title, location, comment, status, type, image, video }] });
 };
 
-export default createIncident;
+const fetchIncident = (req, res) => {
+    const author = req.user.id;
+    res.status(200).json({ status: 200, data: [{ author, issueData }] });
+};
+
+export { createIncident, fetchIncident };
