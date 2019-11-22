@@ -24,4 +24,20 @@ const userSigninValidation = {
     },
 };
 
-export { userSignupValidation, userSigninValidation };
+const incidentValidation = {
+    validation(schema) {
+        const incident = {
+            title: joi.string().trim().required().min(5),
+            author: joi.number().required(),
+            comment: joi.string().required(),
+            status: joi.string().required(),
+            location: joi.string().required().trim(),
+            type: joi.string().required().trim(),
+            image: joi.binary(),
+            video: joi.binary(),
+        };
+        return joi.validate(schema, incident);
+    },
+};
+
+export { userSignupValidation, userSigninValidation, incidentValidation };
