@@ -105,4 +105,18 @@ const editComment = (req, res) => {
     }
 };
 
-export { newRecord, allRecords, specificRecord, editLocation, editComment };
+const deleteRecord = (req, res) => {
+    const author = req.user.uid;
+    const search = issueData.find((incident) => {
+        return incident.id === parseInt(req.params.id);
+    });
+    if (search) {
+        const before = issueData.splice(issueData.indexOf(search), 1);
+        res.status(200).json({ status: 200, data: [{ id: search.id, message: 'Record has been deleted', author, before }] });
+    }
+    else {
+        res.status(404).json({ status: 404, message: 'Failed to find that incident' });
+    }
+};
+
+export { newRecord, allRecords, specificRecord, editLocation, editComment, deleteRecord };
