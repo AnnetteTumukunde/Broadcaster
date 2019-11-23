@@ -1,6 +1,6 @@
 import joi from 'joi';
 
-const userSignupValidation = {
+const validSignup = {
     validation(schema) {
         const signup = {
             firstname: joi.string().trim().required(),
@@ -14,7 +14,7 @@ const userSignupValidation = {
     },
 };
 
-const userSigninValidation = {
+const validSignin = {
     validation(schema) {
         const signin = {
             email: joi.string().trim().required().min(10),
@@ -24,7 +24,7 @@ const userSigninValidation = {
     },
 };
 
-const incidentValidation = {
+const validRecord = {
     validation(schema) {
         const incident = {
             title: joi.string().trim().required().min(5),
@@ -40,4 +40,22 @@ const incidentValidation = {
     },
 };
 
-export { userSignupValidation, userSigninValidation, incidentValidation };
+const validLocation = {
+    validation(schema) {
+        const record = {
+            location: joi.string().required().trim(),
+        };
+        return joi.validate(schema, record);
+    },
+};
+
+const validComment = {
+    validation(schema) {
+        const record = {
+            comment: joi.string().required().trim(),
+        };
+        return joi.validate(schema, record);
+    },
+};
+
+export { validSignup, validSignin, validRecord, validLocation, validComment };
