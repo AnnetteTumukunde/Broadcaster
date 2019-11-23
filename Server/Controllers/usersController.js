@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
-import { userSignupValidation, userSigninValidation } from '../Validation/allValid';
+import { validSignup, validSignin } from '../Validation/allValid';
 import users from '../Data/usersData';
 
 dotenv.config();
 
 const signup = (req, res) => {
-    const { error } = userSignupValidation.validation(req.body);
+    const { error } = validSignup.validation(req.body);
     if (error) {
         return res.status(400).json({ status: 400, error: error.details[0].message });
     }
@@ -31,7 +31,7 @@ const signup = (req, res) => {
 };
 
 const signin = (req, res) => {
-    const { error } = userSigninValidation.validation(req.body);
+    const { error } = validSignin.validation(req.body);
     if (error) {
         return res.status(400).json({ status: 400, error: error.details[0].message });
     }
