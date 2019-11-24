@@ -7,12 +7,17 @@ const newRecord = (req, res) => {
     if (error) {
         return res.status(400).json({ status: 400, error: error.details[0].message });
     }
-    const id = issueData.length;
-    const date = moment().format('ll');
     const author = req.user.uid;
-    const { title, location, comment, status, type, image, video } = req.body;
-    issueData.push({ id, date, author, title, location, comment, status, type, image, video });
-    res.status(201).json({ status: 201, data: [{ id, message: 'Created red-flag record' }, { date, author, title, location, comment, status, type, image, video }] });
+    if (req.body.author === author) {
+        const id = issueData.length;
+        const date = moment().format('ll');
+        const { title, location, comment, status, type, image, video } = req.body;
+        issueData.push({ id, date, author, title, location, comment, status, type, image, video });
+        res.status(201).json({ status: 201, data: [{ id, message: 'Created red-flag record' }, { date, author, title, location, comment, status, type, image, video }] });
+    }
+    else {
+        res.status(404).json({ status: 404, message: 'Unmatching authors' });
+    }
 };
 
 const allRecords = (req, res) => {

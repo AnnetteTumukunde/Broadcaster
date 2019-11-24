@@ -15,10 +15,12 @@ const auth = (req, res, next) => {
             return user.id === parseInt(req.body.id);
         });
         if (retrieve) {
-            return res.status(400).json({ status: 400, message: 'Provided Invalid Token' });
+            res.status(400).json({ status: 400, message: 'Provided Invalid Token' });
         }
-        req.user = { uid: decoded.id };
-        next();
+        else {
+            req.user = { uid: decoded.id };
+            next();
+        }
     }
     catch (e) {
         return res.status(401).json({ status: 401, message: 'Invalid token' });
