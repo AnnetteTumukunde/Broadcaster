@@ -3,7 +3,7 @@ import bodyparser from 'body-parser';
 import routes from './Routes/routes';
 
 const app = express();
-const PORT = process.env.PORT || 1000;
+const port = process.env.PORT || 1000;
 
 app.use(express.json());
 app.use(bodyparser.json());
@@ -11,8 +11,8 @@ app.get('/api/v1', (req, res) => {
     res.json({ status: 200, message: 'Welcome to the Broadcaster' });
 });
 app.use('/', routes);
-app.listen(PORT, () => {
-    console.log(`App listening on port : ${PORT}`);
+app.listen(port, () => {
+    console.log(`App listening on port : ${port}`);
 });
 
 export default app;
