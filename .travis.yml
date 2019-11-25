@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- 10.16.3
+before_script:
+- npm install
+script:
+- npm run test
+after_script:
+-npm run coverage
+env:
+- NODE_ENV = "test"

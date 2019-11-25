@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon --exec babel-node ./Server/index.js",
     "lint": "eslint ./Server || true",
-    "test": "mocha --require @babel/register ./Server/Tests/* || true"
+    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register ./Server/Tests/* --exit || true",
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -35,9 +36,11 @@
     "@babel/node": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
     "@babel/register": "^7.7.4",
+    "coveralls": "^3.0.8",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "mocha": "^6.2.2"
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1"
   }
 }
