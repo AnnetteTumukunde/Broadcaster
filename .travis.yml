@@ -7,5 +7,3 @@ script:
 - npm run test
 after_script:
 -npm run coverage
-env:
-- NODE_ENV = "test"
