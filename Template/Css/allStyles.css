@@ -46,69 +46,28 @@ a {
 .section {
     padding: .5em;
 }
-.section .one {
-    display: flex;
-}
-.section .one .text {
-    font-size: 2rem;
-    max-width: 30vw;
-    color: rgba(0, 6, 43, 0.789);
-}
-.section .one img {
-    max-width: 20vw;
-    max-height: 20em;
-    margin: 0 0 0 auto;
-}
-.content {
-    display: flex;
-    flex-wrap: wrap;
-    margin: .9em auto;
-    padding: 1em;
-    border: .1em solid rgba(0, 6, 43, 0.789);
-}
 .broad {
-    flex: 1 0 10em;
-}
-.content img {
-    max-width: 8em;
-    max-height: 8em;
-    padding-right: .3em;
-}
-.description {
-    color: rgba(0, 6, 43, 0.789);
-    text-align: justify;
-}
-.title {
-    color: #2070c5;
-}
-.tags {
-    padding: 1em;
-    color: #2070c5;
+    flex: 1 0 5em;
 }
 .section .three {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
     text-align: center;
+    align-items: center;
+    width: 90%;
 }
 .three img {
-    max-width: 15em;
+    max-width: 11em;
     max-height: 20em;
     border-radius: .5em;
     margin: .5em 0;
 }
 .three h3 {
-    max-width: 40em;
+    max-width: 50em;
     margin-bottom: 1em;
-    color: rgba(0, 6, 43, 0.789);
-}
-.section .three {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.three .intervention .interve {
+    padding: .5em;
     text-align: center;
+    color: rgba(0, 6, 43, 0.789);
 }
 .link {
     padding: .5em;
@@ -209,10 +168,6 @@ a {
 .bl-space a:hover{
     color: rgba(0, 6, 43, 0.789);
 }
-.sidebar {
-    padding: .4em;
-    max-width: 20vw;
-}
 .new {
     background-color: rgba(0, 6, 43, 0.789);
     margin: .2em;
@@ -234,9 +189,17 @@ a {
     width: 100%;
     border: none;
     padding: 1em 0;
-    font-size: 1em;
+    font-size: 1rem;
     background-color: #fff;
     color: rgba(0, 6, 43, 0.789);
+}
+.description {
+    padding: 1em;
+    background-color: #fff;
+    font-size: 1.5rem;
+}
+.proof {
+    max-width: 70%;
 }
 .buttons {
     display: flex;
@@ -254,7 +217,7 @@ a {
 }
 textarea {
     width: 100%;
-    height: 72vh;
+    height: 50vh;
     resize: none;
     border: none;
     padding: 1em 0;
@@ -263,7 +226,7 @@ textarea {
     display: flex;
     padding: .5em;
     width: 70%;
-    font-size: 1rem;
+    font-size: 2rem;
     margin: 0 0 0 auto;
     color: #fff;
 }
@@ -301,6 +264,10 @@ textarea {
 .all-issues td {
     padding: .5em;
 }
+.all-issues a {
+    color: #fff;
+    font-size: 1rem;
+}
 .not-opened {
     background-color: rgba(121, 121, 121, 0.789);
 }
@@ -319,9 +286,8 @@ textarea {
     background-color: #ff0;
     color: #000;
 }
-.draft {
-    background-color: #2070c5;
-    color: #000;
+.status {
+    border-radius: .3em;
 }
 .add-side {
     display: flex;
@@ -335,7 +301,7 @@ textarea {
     margin: 2em auto;
 }
 .user-ri-table tr{
-    font-size: .5em;
+    font-size: .9rem;
     padding: 1em;
 }
 .user-ri-table td {
