@@ -21,8 +21,15 @@ const newRecord = (req, res) => {
 };
 
 const allRecords = (req, res) => {
-    const author = req.user.uid;
-    res.status(200).json({ status: 200, data: [{ author, issueData }] });
+    const find = issueData.find((user) => {
+        return user.author === req.user.uid;
+    });
+    if (find) {
+        res.status(200).json({ status: 200, data: [{ issueData }] });
+    }
+    else {
+        res.status(404).json({ status: 404, message: 'No created incidents yet.' });
+    }
 };
 
 const specificRecord = (req, res) => {
