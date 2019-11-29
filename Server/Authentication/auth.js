@@ -14,7 +14,7 @@ const auth = (req, res, next) => {
         const retrieve = users.find((user) => {
             return user.id === parseInt(req.body.id);
         });
-        if (retrieve) {
+        if (!retrieve) {
             res.status(400).json({ status: 400, message: 'Provided Invalid Token' });
         }
         else {
