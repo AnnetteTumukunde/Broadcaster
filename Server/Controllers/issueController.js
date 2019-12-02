@@ -7,25 +7,20 @@ const newRecord = (req, res) => {
     if (error) {
         return res.status(400).json({ status: 400, error: error.details[0].message });
     }
-    const author = req.user.uid;
-    if (req.body.author === author) {
-        const id = issueData.length;
-        const date = moment().format('ll');
-        const { title, location, comment, status, type, image, video } = req.body;
-        issueData.push({ id, date, author, title, location, comment, status, type, image, video });
-        res.status(201).json({ status: 201, data: [{ id, message: 'Created red-flag record' }, { date, author, title, location, comment, status, type, image, video }] });
-    }
-    else {
-        res.status(404).json({ status: 404, message: 'Unmatching authors' });
-    }
+    const author = req.user.id;
+    const id = issueData.length + 1;
+    const date = moment().format('ll');
+    const { title, location, comment, status, type, image, video } = req.body;
+    issueData.push({ id, date, author, title, location, comment, status, type, image, video });
+    res.status(201).json({ status: 201, message: 'Created red-flag record', data: [{ id, date, author, title, location, comment, status, type, image, video }] });
 };
 
 const allRecords = (req, res) => {
     const find = issueData.find((user) => {
-        return user.author === req.user.uid;
+        return user.author === req.user.id;
     });
     if (find) {
-        res.status(200).json({ status: 200, data: [{ issueData }] });
+        res.status(200).json({ status: 200, data: issueData });
     }
     else {
         res.status(404).json({ status: 404, message: 'No created incidents yet.' });
@@ -33,15 +28,22 @@ const allRecords = (req, res) => {
 };
 
 const specificRecord = (req, res) => {
-    const author = req.user.uid;
-    const search = issueData.find((incident) => {
-        return incident.id === parseInt(req.params.id);
+    const find = issueData.find((user) => {
+        return user.author === req.user.id;
     });
-    if (search) {
-        res.status(200).json({ status: 200, data: { author, search } });
+    if (find) {
+        const search = issueData.find((incident) => {
+            return incident.id === parseInt(req.params.id);
+        });
+        if (search) {
+            res.status(200).json({ status: 200, data: search });
+        }
+        else {
+            res.status(404).json({ status: 404, message: 'Failed to find incident' });
+        }
     }
     else {
-        res.status(404).json({ status: 404, message: 'Failed to find incident' });
+        res.status(404).json({ status: 404, message: 'No created incidents yet.' });
     }
 };
 
@@ -50,34 +52,32 @@ const editLocation = (req, res) => {
     if (error) {
         return res.status(400).json({ status: 400, error: error.details[0].message });
     }
-    const author = req.user.uid;
-    const search = issueData.find((incident) => {
-        return incident.id === parseInt(req.params.id);
+    const find = issueData.find((user) => {
+        return user.author === req.user.id;
     });
-    if (search) {
-        const place = issueData.find((incident) => {
-            return incident.location === req.params.location;
+    if (find) {
+        const search = issueData.find((incident) => {
+            return incident.id === parseInt(req.params.id);
         });
-        if (place) {
+        if (search) {
             const newChanges = {
                 id: search.id,
                 date: search.date,
-                author,
                 title: search.title,
                 comment: search.comment,
                 location: req.body.location,
                 status: search.status,
                 type: search.type,
             };
-            const before = issueData.splice(issueData.indexOf(search), 1, newChanges);
-            res.status(200).json({ status: 200, data: [{ id: search.id, message: 'Updated incident record location', before, newChanges }] });
+            issueData.splice(issueData.indexOf(search), 1, newChanges);
+            res.status(200).json({ status: 200, data: [{ id: search.id, message: 'Updated incident record location' }] });
         }
         else {
-            res.status(400).json({ status: 400, message: 'Unmatching incident location' });
+            res.status(404).json({ status: 404, message: 'Failed to find that incident' });
         }
     }
     else {
-        res.status(404).json({ status: 404, message: 'Failed to find that incident' });
+        res.status(404).json({ status: 404, message: 'No created incidents yet.' });
     }
 };
 
@@ -86,48 +86,53 @@ const editComment = (req, res) => {
     if (error) {
         return res.status(400).json({ status: 400, error: error.details[0].message });
     }
-    const author = req.user.uid;
-    const search = issueData.find((incident) => {
-        return incident.id === parseInt(req.params.id);
+    const find = issueData.find((user) => {
+        return user.author === req.user.id;
     });
-    if (search) {
-        const incComment = issueData.find((incident) => {
-            return incident.comment === req.params.comment;
+    if (find) {
+        const search = issueData.find((incident) => {
+            return incident.id === parseInt(req.params.id);
         });
-        if (incComment) {
+        if (search) {
             const newChanges = {
                 id: search.id,
                 date: search.date,
-                author,
                 title: search.title,
                 comment: req.body.comment,
                 location: search.location,
                 status: search.status,
                 type: search.type,
             };
-            const before = issueData.splice(issueData.indexOf(search), 1, newChanges);
-            res.status(200).json({ status: 200, data: [{ id: search.id, message: 'Updated incident record comment', before, newChanges }] });
+            issueData.splice(issueData.indexOf(search), 1, newChanges);
+            res.status(200).json({ status: 200, data: [{ id: search.id, message: 'Updated incident record comment' }] });
         }
         else {
-            res.status(400).json({ status: 400, message: 'Unmatching incident comment' });
+            res.status(404).json({ status: 404, message: 'Failed to find that incident' });
         }
     }
     else {
-        res.status(404).json({ status: 404, message: 'Failed to find that incident' });
+        res.status(404).json({ status: 404, message: 'No created incidents yet.' });
     }
 };
 
 const deleteRecord = (req, res) => {
-    const author = req.user.uid;
-    const search = issueData.find((incident) => {
-        return incident.id === parseInt(req.params.id);
+    const find = issueData.find((user) => {
+        return user.author === req.user.id;
     });
-    if (search) {
-        const before = issueData.splice(issueData.indexOf(search), 1);
-        res.status(200).json({ status: 200, data: [{ id: search.id, message: 'Record has been deleted', author, before }] });
+    if (find) {
+        const search = issueData.find((incident) => {
+            return incident.id === parseInt(req.params.id);
+        });
+        if (search) {
+            issueData.splice(issueData.indexOf(search), 1);
+            res.status(200).json({ status: 200, data: [{ id: search.id, message: 'Record has been deleted' }] });
+        }
+        else {
+            res.status(404).json({ status: 404, message: 'Failed to find that incident' });
+        }
     }
     else {
-        res.status(404).json({ status: 404, message: 'Failed to find that incident' });
+        res.status(404).json({ status: 404, message: 'No created incidents yet.' });
     }
 };
 
