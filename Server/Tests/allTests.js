@@ -60,11 +60,11 @@ describe('Signin test', () => {
 describe('Add record test', () => {
     it('Tests if possible to add a record', (done) => {
         chai.request(app).post('/api/v1/incident').set('access-token', token)
-            .send({ title: 'Flooding', type: 'Intervention', comment: 'Development', status: 'Under investigation', author: 1, location: 'Ghana' })
+            .send({ title: 'Flooding', type: 'Intervention', comment: 'Development', status: 'Under investigation', location: 'Ghana' })
             .end((err, res) => {
-                expect(res.status).to.equals(400);
+                expect(res.status).to.equals(201);
                 expect(res.body.status).to.be.a('number');
-                expect(res.body.data).to.be.an('undefined');
+                expect(res.body.data).to.be.an('array');
                 done();
             });
     });
@@ -74,9 +74,9 @@ describe('Fetch records test', () => {
     it('Tests if possible to see all records', (done) => {
         chai.request(app).get('/api/v1/incidents').set('access-token', token)
             .end((err, res) => {
-                expect(res.status).to.equals(400);
+                expect(res.status).to.equals(200);
                 expect(res.body.status).to.be.a('number');
-                expect(res.body.data).to.be.an('undefined');
+                expect(res.body.data).to.be.an('array');
                 done();
             });
     });
@@ -86,9 +86,9 @@ describe('Fetch specific record test', () => {
     it('Tests if possible to see one record', (done) => {
         chai.request(app).get('/api/v1/incidents/1').set('access-token', token)
             .end((err, res) => {
-                expect(res.status).to.equals(400);
+                expect(res.status).to.equals(200);
                 expect(res.body.status).to.be.a('number');
-                expect(res.body.data).to.be.an('undefined');
+                expect(res.body.data).to.be.an('object');
                 done();
             });
     });
@@ -96,10 +96,10 @@ describe('Fetch specific record test', () => {
 
 describe('Edit location test', () => {
     it('Tests if possible to edit the location of record', (done) => {
-        chai.request(app).patch('/api/v1/incidents/1/Ghana').set('access-token', token)
-            .send({ location: 'Uganda' })
+        chai.request(app).patch('/api/v1/incident/2/location').set('access-token', token)
+            .send({ location: 'Kenya' })
             .end((err, res) => {
-                expect(res.status).to.equals(400);
+                expect(res.status).to.equals(404);
                 expect(res.body.status).to.be.a('number');
                 expect(res.body.data).to.be.an('undefined');
                 done();
@@ -109,10 +109,10 @@ describe('Edit location test', () => {
 
 describe('Edit comment test', () => {
     it('Tests if possible to edit the comment of a record', (done) => {
-        chai.request(app).patch('/api/v1/incident/1/Development').set('access-token', token)
+        chai.request(app).patch('/api/v1/incident/2/comment').set('access-token', token)
             .send({ comment: 'African Development' })
             .end((err, res) => {
-                expect(res.status).to.equals(400);
+                expect(res.status).to.equals(404);
                 expect(res.body.status).to.be.a('number');
                 expect(res.body.data).to.be.an('undefined');
                 done();
@@ -124,9 +124,9 @@ describe('Delete record test', () => {
     it('Tests if possible to delete the record', (done) => {
         chai.request(app).delete('/api/v1/incidents/1').set('access-token', token)
             .end((err, res) => {
-                expect(res.status).to.equals(400);
+                expect(res.status).to.equals(200);
                 expect(res.body.status).to.be.a('number');
-                expect(res.body.data).to.be.an('undefined');
+                expect(res.body.data).to.be.an('array');
                 done();
             });
     });

@@ -11,7 +11,7 @@ const signup = (req, res) => {
     if (error) {
         return res.status(400).json({ status: 400, error: error.details[0].message });
     }
-    const id = users.length;
+    const id = users.length + 1;
     const emailExist = users.find((userEmail) => {
         return userEmail.email === req.body.email;
     });

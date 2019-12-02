@@ -28,7 +28,6 @@ const validRecord = {
     validation(schema) {
         const incident = {
             title: joi.string().trim().required().min(5),
-            author: joi.number().required().trim(),
             comment: joi.string().required().trim(),
             status: joi.string().required().trim(),
             location: joi.string().required().trim(),
