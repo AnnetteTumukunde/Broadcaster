@@ -138,18 +138,19 @@ a {
     text-align: center;
 }
 .form input {
-    padding: 2em .9em;
+    padding: .3em;
     margin: 1em 0;
+    height: 2em;
     border-radius: .3em;
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 .form button {
-    padding: 2em;
+    padding: 1em;
     margin: 1em 0;
     border: none;
     border-radius: .3em;
     background-color: #2070c5;
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #fff;
 }
 .form h6 a {
