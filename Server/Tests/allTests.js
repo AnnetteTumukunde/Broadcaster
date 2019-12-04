@@ -174,3 +174,16 @@ describe('Signin test', () => {
             });
     });
 });
+
+describe('Add record test', () => {
+    it('Tests if possible to add a record', (done) => {
+        chai.request(app).post('/api/v2/incident').set('access-token', token)
+            .send({ title: 'Flooding', type: 'Intervention', comment: 'Development', status: 'Under investigation', location: 'Ghana' })
+            .end((err, res) => {
+                expect(res.status).to.equals(201);
+                expect(res.body.status).to.be.a('number');
+                expect(res.body.data).to.be.an('object');
+                done();
+            });
+    });
+});

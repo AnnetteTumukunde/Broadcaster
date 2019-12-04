@@ -30,7 +30,7 @@ const validRecord = {
         const incident = {
             title: joi.string().trim().required().min(5),
             comment: joi.string().required().trim(),
-            status: joi.string().required().trim(),
+            status: joi.string().trim(),
             location: joi.string().required().trim(),
             type: joi.string().required().trim(),
             image: joi.binary(),
