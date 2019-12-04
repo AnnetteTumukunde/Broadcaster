@@ -1,7 +1,7 @@
 import express from 'express';
-import { signup, signin } from '../Controllers/usersController';
+import { signup, signin } from '../Controllers/v1usersController';
 import auth from '../Authentication/auth';
-import { newRecord, allRecords, specificRecord, editLocation, editComment, deleteRecord } from '../Controllers/issueController';
+import { newRecord, allRecords, specificRecord, editLocation, editComment, deleteRecord } from '../Controllers/v1issueController';
 
 const routes = express.Router();
 
