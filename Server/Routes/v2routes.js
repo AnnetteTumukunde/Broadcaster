@@ -5,5 +5,6 @@ import people from '../Controllers/v2usersController';
 const routes = express.Router();
 
 routes.post('/api/v2/auth/signup', people.signup);
+routes.post('/api/v2/auth/signin', people.signin);
 
 export default routes;

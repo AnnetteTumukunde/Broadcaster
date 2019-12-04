@@ -3,8 +3,11 @@ node_js:
 - 10.16.3
 before_script:
 - npm install
+- psql -c 'create database broadcaster_db;' -U postgres
 script:
 - npm run test
 after_script:
 - npm run coverage
+services:
+- postgresql
 
