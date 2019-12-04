@@ -32,28 +32,12 @@ const createTables = () => {
             type VARCHAR(20) NOT NULL,
             author SERIAL CONSTRAINT author REFERENCES users (id) ON DELETE CASCADE
         )`;
-        pool.query(`${usersTable}; ${recordsTable}`)
-            .then((res) => {
-                console.log(res);
-                pool.end();
-            })
-            .catch((e) => {
-                console.log(e);
-                pool.end();
-            });
+        pool.query(`${usersTable}; ${recordsTable}`);
 };
 
 const dropTables = () => {
     const allTables = 'DROP TABLE IF EXISTS incidents; DROP TABLE IF EXISTS users';
-    pool.query(`${allTables}`)
-    .then((res) => {
-        console.log(res);
-        pool.end();
-    })
-    .catch((e) => {
-        console.log(e);
-        pool.end();
-    });
+    pool.query(`${allTables}`);
 };
 
 pool.on('remove', () => {

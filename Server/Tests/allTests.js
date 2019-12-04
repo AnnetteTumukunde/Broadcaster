@@ -7,6 +7,8 @@ import app from '../index';
 chai.use(chaiHttp);
 dotenv.config();
 
+// ------------------------------ V1 TESTS ----------------------------------
+
 const payload = {
     id: 1,
     firstname: 'one',
@@ -127,6 +129,47 @@ describe('Delete record test', () => {
                 expect(res.status).to.equals(200);
                 expect(res.body.status).to.be.a('number');
                 expect(res.body.data).to.be.an('array');
+                done();
+            });
+    });
+});
+
+// ------------------------------ V2 TESTS ----------------------------------
+
+describe('App running test', () => {
+    it('Tests if app is listening the port', (done) => {
+        chai.request(app).get('/api/v2').end((err, res) => {
+            expect(res.body.status).to.be.a('number');
+            expect(res.body.message).to.be.a('string');
+            expect(res.body.message).to.equals('Welcome to the Broadcaster database');
+            done();
+        });
+    });
+});
+
+describe('Signup test', () => {
+    it('Tests if new user can signup', (done) => {
+        chai.request(app).post('/api/v2/auth/signup')
+            .send({ id: 1, firstname: 'one', lastname: 'one', email: 'one@gmail.com', phoneNumber: '0247384034', password: 'one123456', type: 'user' })
+            .end((err, res) => {
+                expect(res.status).to.equals(201);
+                expect(res.body.status).to.be.a('number');
+                expect(res.body.message).to.equals('User created successfully');
+                expect(res.body.data).to.be.an('object');
+                done();
+            });
+    });
+});
+
+describe('Signin test', () => {
+    it('Tests if user can signin', (done) => {
+        chai.request(app).post('/api/v2/auth/signin')
+            .send({ email: 'one@gmail.com', password: 'one123456' })
+            .end((err, res) => {
+                expect(res.status).to.equals(200);
+                expect(res.body.status).to.equals(200);
+                expect(res.body.message).to.equals('User is successfully logged in');
+                expect(res.body.data).to.be.an('object');
                 done();
             });
     });
