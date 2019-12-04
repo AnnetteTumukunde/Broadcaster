@@ -187,3 +187,15 @@ describe('Add record test', () => {
             });
     });
 });
+
+describe('Fetch records test', () => {
+    it('Tests if possible to see all records', (done) => {
+        chai.request(app).get('/api/v2/incidents').set('access-token', token)
+            .end((err, res) => {
+                expect(res.status).to.equals(200);
+                expect(res.body.status).to.be.a('number');
+                expect(res.body.data).to.be.an('array');
+                done();
+            });
+    });
+});

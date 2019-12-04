@@ -16,6 +16,17 @@ class Records {
         const addRecord = await pool.query(query, values);
         res.status(201).json({ status: 201, message: 'Created red-flag record', data: addRecord });
     }
+
+    static async allRecords(req, res) {
+        const query = 'SELECT * FROM incidents WHERE author = $1';
+        const fetch = await pool.query(query, [req.user.id]);
+        if (fetch.rows) {
+            res.status(200).json({ status: 200, data: fetch.rows });
+        }
+        else {
+            res.status(404).json({ status: 404, message: 'No created incidents yet.' });
+        }
+    }
 }
 
 export default Records;
