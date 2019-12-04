@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --exec babel-node ./Server/index.js",
     "lint": "eslint ./Server || true",
-    "test": "nyc --reporter=html --reporter=text mocha --require @babel/register ./Server/Tests/* --exit || true",
+    "test": "babel-node ./Server/Config/v2db.js dropTables && babel-node ./Server/Config/v2db.js createTables && nyc --reporter=html --reporter=text mocha --require @babel/register --require @babel/polyfill ./Server/Tests/* --exit || true",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "build": "babel Server -d build",
     "clean": "rm -rf build",
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/AnnetteTumukunde/Broadcaster#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.7.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
