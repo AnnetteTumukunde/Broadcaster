@@ -10,7 +10,8 @@
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "build": "babel Server -d build",
     "clean": "rm -rf build",
-    "connectdb": "babel-node ./Server/Config/v2db.js createTables"
+    "connectdb": "babel-node ./Server/Config/v2db.js createTables",
+    "droptables": "babel-node ./Server/Config/v2db.js dropTables"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,8 @@
     "jsonwebtoken": "^8.5.1",
     "make-runnable": "^1.3.6",
     "moment": "^2.24.0",
-    "pg": "^7.14.0"
+    "pg": "^7.14.0",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",

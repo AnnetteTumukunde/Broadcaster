@@ -43,10 +43,23 @@ const createTables = () => {
             });
 };
 
+const dropTables = () => {
+    const allTables = 'DROP TABLE IF EXISTS incidents; DROP TABLE IF EXISTS users';
+    pool.query(`${allTables}`)
+    .then((res) => {
+        console.log(res);
+        pool.end();
+    })
+    .catch((e) => {
+        console.log(e);
+        pool.end();
+    });
+};
+
 pool.on('remove', () => {
     console.log('Client removed');
 });
 
-export { pool, createTables };
+export { pool, createTables, dropTables };
 
 require('make-runnable');

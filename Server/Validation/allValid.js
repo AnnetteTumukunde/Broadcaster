@@ -3,6 +3,7 @@ import joi from 'joi';
 const validSignup = {
     validation(schema) {
         const signup = {
+            id: joi.number(),
             firstname: joi.string().trim().required(),
             lastname: joi.string().trim().required(),
             email: joi.string().trim().required(),
