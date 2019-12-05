@@ -160,7 +160,7 @@ describe('App running test', () => {
 describe('Signup test', () => {
     it('Tests if new user can signup', (done) => {
         chai.request(app).post('/api/v2/auth/signup')
-            .send({ id: 1, firstname: 'one', lastname: 'one', email: 'one@gmail.com', phoneNumber: '0247384034', password: 'one123456', type: 'user' })
+            .send({ firstname: 'one', lastname: 'one', email: 'one@gmail.com', phoneNumber: '0247384034', password: 'one123456', type: 'user' })
             .end((err, res) => {
                 expect(res.status).to.equals(201);
                 expect(res.body.status).to.be.a('number');
@@ -174,7 +174,7 @@ describe('Signup test', () => {
 describe('Signup test', () => {
     it('Tests if new user can signup', (done) => {
         chai.request(app).post('/api/v2/auth/signup')
-            .send({ id: 2, firstname: 'two', lastname: 'two', email: 'two@gmail.com', phoneNumber: '0247384035', password: 'two123456', type: 'admin' })
+            .send({ firstname: 'two', lastname: 'two', email: 'two@gmail.com', phoneNumber: '0247384035', password: 'two123456', type: 'admin' })
             .end((err, res) => {
                 expect(res.status).to.equals(201);
                 expect(res.body.status).to.be.a('number');
@@ -206,7 +206,7 @@ describe('Add record test', () => {
             .end((err, res) => {
                 expect(res.status).to.equals(201);
                 expect(res.body.status).to.be.a('number');
-                expect(res.body.data).to.be.an('object');
+                expect(res.body.data).to.be.an('array');
                 done();
             });
     });
@@ -243,7 +243,7 @@ describe('Edit location test', () => {
             .end((err, res) => {
                 expect(res.status).to.equals(200);
                 expect(res.body.status).to.be.a('number');
-                expect(res.body.data).to.be.an('undefined');
+                expect(res.body.data).to.be.an('array');
                 done();
             });
     });
@@ -256,7 +256,7 @@ describe('Edit comment test', () => {
             .end((err, res) => {
                 expect(res.status).to.equals(200);
                 expect(res.body.status).to.be.a('number');
-                expect(res.body.data).to.be.an('undefined');
+                expect(res.body.data).to.be.an('array');
                 done();
             });
     });
@@ -269,7 +269,7 @@ describe('Edit status test', () => {
             .end((err, res) => {
                 expect(res.status).to.equals(200);
                 expect(res.body.status).to.be.a('number');
-                expect(res.body.data).to.be.an('undefined');
+                expect(res.body.data).to.be.an('array');
                 done();
             });
     });
@@ -281,7 +281,7 @@ describe('Delete record test', () => {
             .end((err, res) => {
                 expect(res.status).to.equals(200);
                 expect(res.body.status).to.be.a('number');
-                expect(res.body.data).to.be.an('undefined');
+                expect(res.body.data).to.be.an('array');
                 done();
             });
     });
