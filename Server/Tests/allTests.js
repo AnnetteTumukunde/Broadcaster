@@ -237,3 +237,15 @@ describe('Edit comment test', () => {
             });
     });
 });
+
+describe('Delete record test', () => {
+    it('Tests if possible to delete the record', (done) => {
+        chai.request(app).delete('/api/v2/incidents/1').set('access-token', token)
+            .end((err, res) => {
+                expect(res.status).to.equals(200);
+                expect(res.body.status).to.be.a('number');
+                expect(res.body.data).to.be.an('undefined');
+                done();
+            });
+    });
+});
