@@ -18,8 +18,8 @@ const validSignup = {
 const validSignin = {
     validation(schema) {
         const signin = {
-            email: joi.string().trim().required().min(10),
-            password: joi.string().required().min(8).alphanum(),
+            email: joi.string().required(),
+            password: joi.string().required(),
         };
         return joi.validate(schema, signin);
     },
@@ -58,4 +58,13 @@ const validComment = {
     },
 };
 
-export { validSignup, validSignin, validRecord, validLocation, validComment };
+const validStatus = {
+    validation(schema) {
+        const record = {
+            status: joi.string().required(),
+        };
+        return joi.validate(schema, record);
+    },
+};
+
+export { validSignup, validSignin, validRecord, validLocation, validComment, validStatus };

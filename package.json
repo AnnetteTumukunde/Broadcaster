@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node ./Server/index.js",
+    "dev": "babel-node ./Server/Config/v2db.js dropTables && babel-node ./Server/Config/v2db.js createTables && nodemon --exec babel-node ./Server/index.js",
     "lint": "eslint ./Server || true",
     "test": "babel-node ./Server/Config/v2db.js dropTables && babel-node ./Server/Config/v2db.js createTables && nyc --reporter=html --reporter=text mocha --require @babel/register --require @babel/polyfill ./Server/Tests/* --exit || true",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
