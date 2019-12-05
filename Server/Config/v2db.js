@@ -2,7 +2,7 @@ import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const connectionString = process.env.DB_URL;
+const connectionString = process.env.DATABASE_URL;
 const pool = new Pool({
     connectionString,
 });
@@ -28,6 +28,7 @@ const createTables = () => {
             title VARCHAR(50) NOT NULL,
             date TIMESTAMP NOT NULL,
             comment VARCHAR(200) NOT NULL,
+            status VARCHAR(20),
             location VARCHAR(50) NOT NULL,
             type VARCHAR(20) NOT NULL,
             author SERIAL CONSTRAINT author REFERENCES users (id) ON DELETE CASCADE

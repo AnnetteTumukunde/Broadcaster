@@ -19,6 +19,16 @@ const payload = {
     type: 'user',
 };
 const token = jwt.sign(payload, process.env.PRIVATE_KEY);
+const adminpayload = {
+    id: 2,
+    firstname: 'two',
+    lastname: 'two',
+    email: 'two@gmail.com',
+    phoneNumber: '0247384035',
+    password: 'two123456',
+    type: 'admin',
+};
+const admintoken = jwt.sign(adminpayload, process.env.PRIVATE_KEY);
 
 describe('App running test', () => {
     it('Tests if app is listening the port', (done) => {
@@ -62,7 +72,7 @@ describe('Signin test', () => {
 describe('Add record test', () => {
     it('Tests if possible to add a record', (done) => {
         chai.request(app).post('/api/v1/incident').set('access-token', token)
-            .send({ title: 'Flooding', type: 'Intervention', comment: 'Development', status: 'Under investigation', location: 'Ghana' })
+            .send({ title: 'Flooding', type: 'Intervention', comment: 'Development', location: 'Ghana' })
             .end((err, res) => {
                 expect(res.status).to.equals(201);
                 expect(res.body.status).to.be.a('number');
@@ -161,6 +171,20 @@ describe('Signup test', () => {
     });
 });
 
+describe('Signup test', () => {
+    it('Tests if new user can signup', (done) => {
+        chai.request(app).post('/api/v2/auth/signup')
+            .send({ id: 2, firstname: 'two', lastname: 'two', email: 'two@gmail.com', phoneNumber: '0247384035', password: 'two123456', type: 'admin' })
+            .end((err, res) => {
+                expect(res.status).to.equals(201);
+                expect(res.body.status).to.be.a('number');
+                expect(res.body.message).to.equals('User created successfully');
+                expect(res.body.data).to.be.an('object');
+                done();
+            });
+    });
+});
+
 describe('Signin test', () => {
     it('Tests if user can signin', (done) => {
         chai.request(app).post('/api/v2/auth/signin')
@@ -178,7 +202,7 @@ describe('Signin test', () => {
 describe('Add record test', () => {
     it('Tests if possible to add a record', (done) => {
         chai.request(app).post('/api/v2/incident').set('access-token', token)
-            .send({ title: 'Flooding', type: 'Intervention', comment: 'Development', location: 'Ghana' })
+            .send({ title: 'Flooding', type: 'Intervention', status: '--', comment: 'Development', location: 'Ghana' })
             .end((err, res) => {
                 expect(res.status).to.equals(201);
                 expect(res.body.status).to.be.a('number');
@@ -229,6 +253,19 @@ describe('Edit comment test', () => {
     it('Tests if possible to edit the comment of a record', (done) => {
         chai.request(app).patch('/api/v2/incident/1/comment').set('access-token', token)
             .send({ comment: 'African Development' })
+            .end((err, res) => {
+                expect(res.status).to.equals(200);
+                expect(res.body.status).to.be.a('number');
+                expect(res.body.data).to.be.an('undefined');
+                done();
+            });
+    });
+});
+
+describe('Edit status test', () => {
+    it('Tests if possible to edit the status of record', (done) => {
+        chai.request(app).patch('/api/v2/incident/1/status').set('access-token', admintoken)
+            .send({ status: 'Resolved' })
             .end((err, res) => {
                 expect(res.status).to.equals(200);
                 expect(res.body.status).to.be.a('number');
