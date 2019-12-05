@@ -9,5 +9,6 @@ routes.post('/api/v2/auth/signup', people.signup);
 routes.post('/api/v2/auth/signin', people.signin);
 routes.post('/api/v2/incident', auth, Records.newRecord);
 routes.get('/api/v2/incidents', auth, Records.allRecords);
+routes.get('/api/v2/incidents/:id([0-9]+)', auth, Records.specificRecord);
 
 export default routes;

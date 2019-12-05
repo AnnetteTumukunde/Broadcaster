@@ -14,7 +14,7 @@ class Records {
         const query = 'INSERT INTO incidents(title, date, comment, location, type, author) VALUES($1,$2,$3,$4,$5,$6) RETURNING *';
         const values = [title, date, comment, location, type, author];
         const addRecord = await pool.query(query, values);
-        res.status(201).json({ status: 201, message: 'Created red-flag record', data: addRecord });
+        res.status(201).json({ status: 201, message: 'Created red-flag record', data: addRecord.rows[0] });
     }
 
     static async allRecords(req, res) {
@@ -25,6 +25,17 @@ class Records {
         }
         else {
             res.status(404).json({ status: 404, message: 'No created incidents yet.' });
+        }
+    }
+
+    static async specificRecord(req, res) {
+        const query = 'SELECT * FROM incidents WHERE id = $1 AND author = $2';
+        const fetch = await pool.query(query, [parseInt(req.params.id), req.user.id]);
+        if (fetch.rows < '1') {
+            res.status(404).json({ status: 404, message: 'Failed to find incident' });
+        }
+        else {
+            res.status(200).json({ status: 200, data: fetch.rows[0] });
         }
     }
 }
