@@ -19,12 +19,18 @@ class people {
             res.status(401).json({ status: 401, error: 'Email already exist, rather signin' });
         }
         else {
-            const { id, firstname, lastname, phoneNumber, type } = req.body;
+            const { firstname, lastname, phoneNumber, type } = req.body;
             const password = bcrypt.hashSync(req.body.password);
-            const query = 'INSERT INTO users(id, firstname, lastname, email, phone, password, type) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *';
-            const values = [id, firstname, lastname, verifyEmail, phoneNumber, password, type];
+            const query = 'INSERT INTO users(firstname, lastname, email, phone, password, type) VALUES($1,$2,$3,$4,$5,$6) RETURNING *';
+            const values = [firstname, lastname, verifyEmail, phoneNumber, password, type];
             const adduser = await pool.query(query, values);
-            const payload = { id, firstname, lastname, verifyEmail, phoneNumber, type };
+            const payload = {
+                id: adduser.rows[0].id,
+                firstname,
+                lastname,
+                verifyEmail,
+                phoneNumber,
+                type };
             const token = jwt.sign(payload, process.env.PRIVATE_KEY, { expiresIn: '150d' });
             res.status(201).json({
                 status: 201,

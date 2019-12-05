@@ -3,10 +3,9 @@ import joi from 'joi';
 const validSignup = {
     validation(schema) {
         const signup = {
-            id: joi.number(),
             firstname: joi.string().trim().required(),
             lastname: joi.string().trim().required(),
-            email: joi.string().trim().required(),
+            email: joi.string().email().trim().required(),
             phoneNumber: joi.string().max(12).min(10).required(),
             password: joi.string().min(8).alphanum().required(),
             type: joi.string().trim().required(),
@@ -49,6 +48,15 @@ const validLocation = {
     },
 };
 
+const validId = {
+    validation(schema) {
+        const record = {
+            id: joi.number().required().max(100000).min(1),
+        };
+        return joi.validate(schema, record);
+    },
+};
+
 const validComment = {
     validation(schema) {
         const record = {
@@ -67,4 +75,4 @@ const validStatus = {
     },
 };
 
-export { validSignup, validSignin, validRecord, validLocation, validComment, validStatus };
+export { validSignup, validSignin, validRecord, validLocation, validComment, validStatus, validId };
