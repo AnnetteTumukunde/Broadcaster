@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { pool } from '../Config/v2db';
-import { validRecord } from '../Validation/allValid';
+import { validRecord, validLocation } from '../Validation/allValid';
 
 class Records {
     static async newRecord(req, res) {
@@ -36,6 +36,23 @@ class Records {
         }
         else {
             res.status(200).json({ status: 200, data: fetch.rows[0] });
+        }
+    }
+
+    static async editLocation(req, res) {
+        const { error } = validLocation.validation(req.body);
+        if (error) {
+            return res.status(400).json({ status: 400, error: error.details[0].message });
+        }
+        const { location } = req.body;
+        const id = parseInt(req.params.id);
+        const query = 'UPDATE incidents SET location = $1 WHERE id = $2 AND author = $3';
+        const update = await pool.query(query, [location, id, req.user.id]);
+        if (update.rows[0]) {
+            res.status(404).json({ status: 404, message: 'Failed to find that incident' });
+        }
+        else {
+            res.status(200).json({ status: 200, data: update.rows[0], message: 'Updated incident record location' });
         }
     }
 }
