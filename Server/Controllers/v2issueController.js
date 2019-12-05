@@ -72,6 +72,17 @@ class Records {
             res.status(200).json({ status: 200, data: update.rows[0], message: 'Updated incident record location' });
         }
     }
+
+    static async deleteRecord(req, res) {
+        const query = 'DELETE FROM incidents WHERE id = $1 AND author = $2';
+        const deleteRecord = await pool.query(query, [parseInt(req.params.id), req.user.id]);
+        if (deleteRecord.rows[0]) {
+            res.status(404).json({ status: 404, message: 'Failed to find that incident' });
+        }
+        else {
+            res.status(200).json({ status: 200, message: 'Record has been deleted' });
+        }
+    }
 }
 
 export default Records;
