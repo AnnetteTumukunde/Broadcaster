@@ -55,7 +55,7 @@ class Records {
             res.status(200).json({ status: 200, data: update.rows[0], message: 'Updated incident record location' });
         }
     }
-
+  
     static async editComment(req, res) {
         const { error } = validComment.validation(req.body);
         if (error) {
