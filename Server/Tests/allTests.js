@@ -224,3 +224,16 @@ describe('Edit location test', () => {
             });
     });
 });
+
+describe('Edit comment test', () => {
+    it('Tests if possible to edit the comment of a record', (done) => {
+        chai.request(app).patch('/api/v2/incident/1/comment').set('access-token', token)
+            .send({ comment: 'African Development' })
+            .end((err, res) => {
+                expect(res.status).to.equals(200);
+                expect(res.body.status).to.be.a('number');
+                expect(res.body.data).to.be.an('undefined');
+                done();
+            });
+    });
+});

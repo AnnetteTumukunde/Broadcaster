@@ -11,5 +11,6 @@ routes.post('/api/v2/incident', auth, Records.newRecord);
 routes.get('/api/v2/incidents', auth, Records.allRecords);
 routes.get('/api/v2/incidents/:id([0-9]+)', auth, Records.specificRecord);
 routes.patch('/api/v2/incident/:id([0-9]+)/location', auth, Records.editLocation);
+routes.patch('/api/v2/incident/:id([0-9]+)/comment', auth, Records.editComment);
 
 export default routes;
