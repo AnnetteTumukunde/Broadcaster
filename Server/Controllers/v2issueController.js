@@ -60,7 +60,7 @@ class Records {
             res.status(404).json({ status: 404, message: 'Incident not found.' });
         }
         else {
-            res.status(200).json({ status: 200, data: [{ id: update.rows[0].id, message: 'Updated incident record location' }] });
+            res.status(200).json({ status: 200, data: [{ id: update.rows[0].id, message: 'Updated incident location' }] });
         }
     }
 
@@ -81,7 +81,7 @@ class Records {
             res.status(404).json({ status: 404, message: 'Incident not found.' });
         }
         else {
-            res.status(200).json({ status: 200, data: [{ id: update.rows[0].id, message: 'Updated incident record location' }] });
+            res.status(200).json({ status: 200, data: [{ id: update.rows[0].id, message: 'Updated incident comment' }] });
         }
     }
 
@@ -125,7 +125,7 @@ class Records {
                 res.status(404).json({ status: 404, message: 'Incident not found.' });
             }
             else {
-                res.status(200).json({ status: 200, data: [{ id: update.rows[0].id, message: 'Updated incident record status' }] });
+                res.status(200).json({ status: 200, data: [{ id: update.rows[0].id, message: 'Updated incident status' }] });
             }
         }
     }
